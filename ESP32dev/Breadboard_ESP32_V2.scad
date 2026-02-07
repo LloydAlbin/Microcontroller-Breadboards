@@ -1,4 +1,4 @@
-use <../library/MicrocontrollerBreadboards.scad>;
+use <../MicrocontrollerBreadboards.scad>;
 
 $fn = $preview ? 32 : 64;
 
