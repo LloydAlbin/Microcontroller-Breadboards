@@ -1,5 +1,8 @@
 # Microcontroller-Breadboards
+
 Breadboards for Wide Microcontrollers
+
+**NOTE:** This project is not finished until the BUGS.md file is finished and this note goes away. 2/6/2026
 
 This project provides a custom 3D-printed breadboard body designed to accommodate modern, wide microcontroller development boards such as the **Raspberry Pi Pico**, **ESP32 Dev Board**, and **Arduino nano**, **ESP32-P4-WIFI6**. The metal spring contacts from a standard commercial breadboard are removed and reused inside the new housing, giving you a full-size 63×5 contact area and two power rails — just like the real thing.
 
@@ -77,5 +80,6 @@ The concept was inspired by the MAKE Advent Calendar project on Tinkercad:
 This version expands the idea to a **full-length 63-row breadboard** with **complete power rails**.
 
 ## 📜 License
+
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 (CC BY-NC-SA 4.0)
 see license.txt
