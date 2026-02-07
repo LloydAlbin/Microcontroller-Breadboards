@@ -18,11 +18,9 @@ TODO LIST:
 10 Create back
 11) Add variables for back to main board
 12) Make work on a multi-color 3D printer ????
-13) Fix ocassional missing top row of pins in a section, See test board #1 for 2 missing rows 5 & 15
 15) Add Power Rail Full Length Cut Out
 16) Add Power Rail Row Tab
 16) Add Pin Row Tab
-17) Missing Pin columns after chaing pin_width from 1mm to 0.9mm per specs
 */
 
 
@@ -68,7 +66,7 @@ test_board_specs=[
         8.25,                   // board_height
         2.54,                   // pin_pitch
         2,                      // power_rail_sections
-        0.9,                    // Pin Width
+        1,                      // Pin Width is value-0.1 x value-0.1
         5,                      // Number of pins in a row
         global_text_size,       // Text Size
         global_text_thickness,  // Text Thickness
@@ -138,7 +136,7 @@ all_board_specs=[
 
 //multi_board(x, y, all_board_specs[board_number], dups_x, dups_y);
 
-board_examples(3);
+board_examples(0);
 //multi_board(0, 0, all_board_specs[3], 0, 0);
 
 
@@ -643,8 +641,9 @@ module pin_rows(x, y, board_specs)
         number_of_rows=row_specs[idx][number_of_rows_pos];
         center_item=row_specs[idx][center_item_pos];
 
-        for (ny = [y+(starting_row*pin_pitch) : pin_pitch : y+(starting_row*pin_pitch)+((number_of_rows-1)*pin_pitch)])
+        for (row_num = [0 : 1 : number_of_rows-1])
         {
+            ny=y+((starting_row+row_num)*pin_pitch);
             pin_row (x, ny, gap, (center_item == 1 ? true : false), board_specs);
         }
         
@@ -684,8 +683,9 @@ module pin_row(x, y, gap, center_row, board_specs)
     
     // Left Row
     start_x1=board_center-(gap/2)-(((number_of_pins-1)*pin_pitch)+pin_width);
-    for (nx = [start_x1 : pin_pitch : start_x1+((number_of_pins-1)*pin_pitch)])
+    for (col_pin = [0 : 1 : number_of_pins-1])
     {
+        nx = start_x1+(col_pin*pin_pitch);
         pin_hole (nx, y, board_specs);
     }
     translate ([start_x1-.5, y-.5, 0-preview_adjustment])
@@ -734,12 +734,12 @@ module pin_hole(x, y, board_specs)
     translate ([x, y, 0-preview_adjustment])
     cube([pin_width,pin_width,board_height+(preview_adjustment*2)]);
 
-    pin_slope_top_width = pin_width + .1;
-    pin_slope_border = .1/2;
+    pin_slope_border = 0.1;
+    pin_slope_border_per_side = pin_slope_border/2;
     
-    translate ([x-pin_slope_border, y+pin_slope_border+pin_width, board_height+preview_adjustment])
+    translate ([x-(pin_slope_border_per_side/2), y-pin_slope_border_per_side+pin_width, board_height+preview_adjustment])
     rotate([180,0,0])
-    trapezoidal_prism(pin_slope_top_width, pin_slope_top_width, .15);
+    trapezoidal_prism(pin_width, pin_width, .15);
 }
 
 // Module: roundedcube()
