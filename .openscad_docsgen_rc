@@ -1,0 +1,33 @@
+DocsDirectory: Microcontroller-Breadboard.wiki/
+TargetProfile: githubwiki
+ProjectName: The Lloyd Albin Breadboards for Wide Microcontrollers Library, v1. (Microcontroller-Breadboard)
+GenerateDocs: Files, TOC, Index, Topics, CheatSheet, Sidebar, Glossary
+SidebarHeader:
+  ## Indices
+  .
+SidebarMiddle:
+  [Tutorials](Tutorials)  
+SidebarFooter:
+UsePNGAnimations: Yes
+IgnoreFiles:
+  tmp_*.scad
+PrioritizeFiles:
+  MicrocontrollerBreadboards.scad
+DefineHeader(BulletList): Side Effects
+DefineHeader(Table;Headers=Anchor Name|Position): Named Anchors
+DefineHeader(Table;Headers=Anchor Type|What it is): Anchor Types
+DefineHeader(Table;Headers=Attachable Part|What it is): Attachable Parts
+DefineHeader(Table;Headers=Name|Definition): Terminology
+DefineHeader(BulletList): Requirements
+DefineSynTags:
+  Ext = Extends the OpenScad keyword of the same name.
+  Geom = Can return geometry.
+  Mat = Can return a transformation matrix.
+  MatList = Can return a list of transformation matrices.
+  Path = Can return a Path.
+  PathList = Can return a list of Paths.
+  Region = Can return a Region.
+  RegList = Can return a list of Regions.
+  Trans = Can transform children.
+  VNF = Can return a VNF.
+
