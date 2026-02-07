@@ -13,3 +13,4 @@ Breadboards for Wide Microcontrollers
 - Add variables for back to main board
 - Add Outside cut-out Option
 - Add Inside/Outside cut-out Option
+- Add Option to rotate Pin Rows for 1.8" TFT Display
