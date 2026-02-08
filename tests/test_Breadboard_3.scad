@@ -26,7 +26,8 @@ test_spec=[
         1,                      // Starting letter in Aphabet
         3,                      // 0 = off, 1 = back screw, 2 = 2mm Nut, 3 = 2mm Heat Insert, 4 = Wood Screw
         [
-            [7.62, 0, 17, 0],
+            [7.62, 0, 17, 0,
+            false],
         ]
     ];
 single_board(0, 0, test_spec);

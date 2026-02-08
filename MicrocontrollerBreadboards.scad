@@ -55,6 +55,7 @@ gap_pos=0;
 starting_row_pos=1;
 number_of_rows_pos=2;
 center_item_pos=3;
+skip_rows_pos=4;
 
 // These boards are for testing all the sections of the code
 // or for testing your 3D printer.
@@ -80,10 +81,11 @@ test_board_specs=[
                 0,      // starting_row
                 2,      // number_of_rows 
                 0,      // 0 = off, 1 = center row, 2 = cut out
+                false,  // false = display rows, true = hide rows
             ],
-            [25.4-1, 2, 3, 1], 
-            [25.4-1, 5, 7, 2],
-            [7.62, 12, 3, 0],
+            [25.4-1, 2, 3, 1, false], 
+            [25.4-1, 5, 7, 2, false],
+            [7.62, 12, 3, 0, false],
         ]
     ],
 // Test Board #2
@@ -102,36 +104,36 @@ test_board_specs=[
         27, // Starting letter in Aphabet
         3, // 0 = off, 1 = back screw, 2 = 2mm Nut, 3 = 2mm Heat Insert, 4 = Wood Screw
         [
-            [25.4-1, 0, 5, 0],
-            [7.62, 5, 4, 0],
+            [25.4-1, 0, 5, 0, false],
+            [7.62, 5, 4, 0, false],
         ]
     ],
 // Test Board #3
-[45, 35, 8.25, 2.54, 0, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[7.62, 0, 17, 0]]],
+[45, 35, 8.25, 2.54, 0, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[7.62, 0, 17, 0, false]]],
 ];
 
 // This is where you define the board styles
 all_board_specs=[
 // Standard Board (Full Size)
-[164, 55, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[7.62, 0, 63, 0]]],
+[164, 55, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[7.62, 0, 63, 0, false]]],
 // Standard Board (1/2 Size)
-[81.5, 55, 8.25, 2.54, 5, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[7.62, 0, 30, 0]]],
+[81.5, 55, 8.25, 2.54, 5, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[7.62, 0, 30, 0, false]]],
 // Standard Board (Mini Size)
-[45, 35, 8.25, 2.54, 0, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[7.62, 0, 17, 0]]],
+[45, 35, 8.25, 2.54, 0, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[7.62, 0, 17, 0, false]]],
 // Raspberry PI Pico / Waveshare ESP32-P4-WIFI6
-[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[17.78-1, 0, 24, 2], [7.62, 24, 63-24, 0]]],
+[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[17.78-1, 0, 24, 2, false], [7.62, 24, 63-24, 0, false]]],
 // ESP32 V1
-[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[25.4-1, 0, 63, 2]]],
+[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[25.4-1, 0, 63, 2, false]]],
 // ESP32 V2
-[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[25.4-1, 0, 24, 2], [25.4-1, 24, 63-24, 1]]],
+[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[25.4-1, 0, 24, 2, false], [25.4-1, 24, 63-24, 1, false]]],
 // ESP32 V3
-[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[25.4-1, 0, 24, 2], [7.62, 24, 63-24, 2]]],
+[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[25.4-1, 0, 24, 2, false], [7.62, 24, 63-24, 2, false]]],
 // ESP8266 (Mini) V1
-[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[22.86-1, 0, 63, 2]]],
+[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[22.86-1, 0, 63, 2, false]]],
 // ESP8266 (Mini) V2
-[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[22.86-1, 0, 24, 2], [22.86-1, 24, 63-24, 1]]],
+[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[22.86-1, 0, 24, 2, false], [22.86-1, 24, 63-24, 1, false]]],
 // ESP8266 (Mini) V3
-[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[22.86-1, 0, 24, 2], [7.62, 24, 63-24, 0]]],
+[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[22.86-1, 0, 24, 2, false], [7.62, 24, 63-24, 0, false]]],
 ];
 
 //multi_board(x, y, all_board_specs[board_number], dups_x, dups_y);
@@ -781,6 +783,7 @@ module pin_rows2(x, y, board_specs)
             starting_row=row_specs[idx][starting_row_pos];
             number_of_rows=row_specs[idx][number_of_rows_pos];
             center_item=row_specs[idx][center_item_pos];
+            skip_rows=row_specs[idx][skip_rows_pos];
 
             //current_number_of_rows=ofs[idx];
             current_number_of_rows=0;
@@ -793,25 +796,28 @@ module pin_rows2(x, y, board_specs)
             //echo (board_width=board_width, row_width_with_gap=(row_width+gap));
             //echo (board_depth=board_depth, rows_height=rows_height);
             //echo (nsx=nsx, nsy=nsy);
-            
-            translate([x+nsx,y+nsy,0])
-            union()
-            {
-                for (row_num = [0 : 1 : number_of_rows-1])
-                {
-                    ny=((starting_row+row_num)*pin_pitch);
-                    //echo (idx=idx, center_item=center_item);
-                    //echo (idx=idx, center_item=(center_item == 1 ? true : false));
-                    pin_row2 (0, ny, gap, (center_item == 1 ? true : false), board_specs);
-                }
-                
-                if (center_item==2)
-                {
-                    board_center=(row_width+gap)/2;
 
-                    translate ([board_center-((gap-(pin_pitch*2))/2), y+((starting_row+1)*pin_pitch), 0-preview_adjustment])
-                    //roundedcube(gap-(pin_pitch*2), (number_of_rows-3)*pin_pitch, board_height, 0);
-                    roundedcube(gap-(pin_pitch*2), (number_of_rows-3)*pin_pitch, board_height+(preview_adjustment*2), 3);
+            if (skip_rows == false)
+            {
+                translate([x+nsx,y+nsy,0])
+                union()
+                {
+                    for (row_num = [0 : 1 : number_of_rows-1])
+                    {
+                        ny=((starting_row+row_num)*pin_pitch);
+                        //echo (idx=idx, center_item=center_item);
+                        //echo (idx=idx, center_item=(center_item == 1 ? true : false));
+                        pin_row2 (0, ny, gap, (center_item == 1 ? true : false), board_specs);
+                    }
+                    
+                    if (center_item==2)
+                    {
+                        board_center=(row_width+gap)/2;
+
+                        translate ([board_center-((gap-(pin_pitch*2))/2), y+((starting_row+1)*pin_pitch), 0-preview_adjustment])
+                        //roundedcube(gap-(pin_pitch*2), (number_of_rows-3)*pin_pitch, board_height, 0);
+                        roundedcube(gap-(pin_pitch*2), (number_of_rows-3)*pin_pitch, board_height+(preview_adjustment*2), 3);
+                    }
                 }
             }
         }

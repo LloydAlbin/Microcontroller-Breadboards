@@ -2,12 +2,12 @@ use <../MicrocontrollerBreadboards.scad>;
 
 $fn = $preview ? 32 : 64;
 
-Standard_Breadboard_Half_spec=[
-    81.5, 
-    55, 
+TCA9548A_spec=[
+    164, 
+    60, 
     8.25, 
     2.54, 
-    5, 
+    10, 
     1, 
     5, 
     1.5, 
@@ -18,13 +18,20 @@ Standard_Breadboard_Half_spec=[
     3, 
     [
         [
-            7.62, 
+            22.86-1-2.54-2.54, 
             0, 
-            30, 
+            12, 
+            0,
+            false
+        ], 
+        [
+            7.62, 
+            12, 
+            63-12, 
             0,
             false
         ], 
     ]
 ];
 
-single_board(0, 0, Standard_Breadboard_Half_spec);
+single_board(0, 0, TCA9548A_spec);

@@ -31,10 +31,14 @@ test_spec=[
                 0,      // starting_row
                 2,      // number_of_rows 
                 0,      // 0 = off, 1 = center row, 2 = cut out
+                false
             ],
-            [25.4-1, 2, 3, 1], 
-            [25.4-1, 5, 7, 2],
-            [7.62, 12, 3, 0],
+            [25.4-1, 2, 3, 1,
+            false], 
+            [25.4-1, 5, 7, 2,
+            false],
+            [7.62, 12, 3, 0,
+            false],
         ]
     ];
 

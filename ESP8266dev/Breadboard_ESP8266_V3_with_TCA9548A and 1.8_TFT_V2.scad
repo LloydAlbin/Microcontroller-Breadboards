@@ -1,9 +1,6 @@
 use <../MicrocontrollerBreadboards.scad>;
 
-//$fn = $preview ? 32 : 64;
-//$fn=6;
-//$fa=1;
-//$fs=1;
+$fn = $preview ? 32 : 64;
 
 /*
 // ESP8266 (Mini) V1
@@ -39,23 +36,22 @@ ESP32_spec=[
         [
             7.62, 
             11, 
-            63-11-14, 
+            63-12-14, 
             0,
             false
-        ],
+        ], 
         [
-            7.62, 
-            0, 
+            53, 
             63-14, 
-            14,
+            14, 
+            0,
             true
-        ] 
+        ], 
     ]
 ];
-
-standard_board=[
+TCA9548A_spec=[
     164, 
-    55, 
+    60, 
     8.25, 
     2.54, 
     10, 
@@ -69,25 +65,32 @@ standard_board=[
     3, 
     [
         [
-            7.62, 
+            22.86-1-2.54-2.54, 
             0, 
-            0, 
-            63-14,
+            12, 
+            2,
             false
-        ],
+        ], 
         [
             7.62, 
-            0, 
+            12, 
+            63-12-14, 
+            0,
+            false
+        ], 
+        [
+            53, 
             63-14, 
-            14,
+            14, 
+            0,
             true
-        ]
+        ], 
     ]
 ];
 
 display_board=[
-    164, 
-    55+64, 
+    ESP32_spec[0], 
+    ESP32_spec[1]+TCA9548A_spec[1], 
     8.25, 
     2.54, 
     0, 
@@ -122,7 +125,9 @@ difference()
     union()
     {
         single_board(0, 0, ESP32_spec);
-        single_board(0+ESP32_spec[1], 0, standard_board);
+        single_board(0+ESP32_spec[1], 0, TCA9548A_spec);
     }
     pin_rows (0, 0+display_board[3], display_board);
 }
+
+

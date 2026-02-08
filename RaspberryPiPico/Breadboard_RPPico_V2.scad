@@ -24,7 +24,8 @@ RaspberryPiPico_spec=[
             17.78-1, 
             0, 
             63, 
-            2
+            2,
+            false
         ], 
     ]
 ];

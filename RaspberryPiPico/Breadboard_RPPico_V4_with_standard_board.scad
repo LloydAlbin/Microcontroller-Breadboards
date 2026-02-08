@@ -21,13 +21,15 @@ RaspberryPiPico_spec=[
             17.78-1, 
             0, 
             24, 
-            2
+            2,
+            false
         ], 
         [
             7.62, 
             24, 
             63-24, 
-            0
+            0,
+            false
         ]
     ]
 ];
@@ -51,7 +53,8 @@ standard_board=[
             7.62, 
             0, 
             63, 
-            0
+            0,
+            false
         ]
     ]
 ];
