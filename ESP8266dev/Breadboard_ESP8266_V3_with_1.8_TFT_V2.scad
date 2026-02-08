@@ -1,6 +1,7 @@
 use <../MicrocontrollerBreadboards.scad>;
 
-$fn = $preview ? 32 : 64;
+//$fn = $preview ? 32 : 64;
+//$fn=6;
 //$fa=1;
 //$fs=1;
 

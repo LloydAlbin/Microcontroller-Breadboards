@@ -6,7 +6,6 @@ Breadboards for Wide Microcontrollers
 
 - Add Top Lettering
 - Y access center power rails
-- Y access center pins
 - Add Power Rail Full Length Cut Out
 - Add Power Rail Row Tab
 - Add Pin Row Tab
