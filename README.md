@@ -36,13 +36,18 @@ With this custom breadboard, the microcontroller sits in the middle, leaving **f
 
 This repository contains:
 
-- /ESP32dev/          – Source CAD file, STL model, 3MF file for ESP32 development board
-- /ESP8266dev/        – Source CAD file, STL model, 3MF file for ESP32 development board
-- /TCA9548Adev/       – Source CAD file, STL model, 3MF file for ESP32 development board
-- /RaspberryPiPico/   – Source CAD file, STL model, 3MF file for Raspberry Pi Pico / ESP32-P4-WIFI6
-- /photos/            – Build & assembly photos (for documentation)
-- README.md           - this file
-- license.txt         - license
+- /ESP32dev/                      – Source SCAD file, STL model, 3MF file for ESP32 development board
+- /ESP8266dev/                    – Source SCAD file, STL model, 3MF file for ESP8266 development board
+- /TCA9548Adev/                   – Source SCAD file, STL model, 3MF file for ESPTCA9548A development board
+- /RaspberryPiPico/               – Source SCAD file, STL model, 3MF file for Raspberry Pi Pico / ESP32-P4-WIFI6
+- /StandardBreadboards/           – Source SCAD file, STL model, 3MF file for Standard breakboards (Full, Half, Mini)
+- /tests/                         – Source SCAD file, STL model, 3MF file for our test boards, excersizing versious sections of the library code
+- /photos/                        – Build & assembly photos (for documentation)
+- README.md                       - this file
+- license.txt                     - license
+- MicrocontrollerBreadboards.scad - This is the Microcontroller Breadboard Library
+- BUGS.md                         - List of current know bugs
+- TODO.md                         - List of current features we wish to add to the library
 
 ## 🖨 Printing Notes
 
@@ -51,9 +56,10 @@ This repository contains:
 - **nozzle diameter: 0.4 mm recommended**
 - Infill: 50%
 - Supports: Not required for main board (flip upside down to print)
-- Optional: Pause print to insert M2 nuts for screw mounting
+- Optional: Bottom Plate (If not using a bottom plate, it is intended that you put on a double stick foam backing)
+- Optional: Pause print to insert M2 nuts for screw mounting (If using a nut, my prefered version is the heat insert)
 
-Alternatively, the bottom plate may be **glued** instead of screwed.
+If you can't use the Heat Insert of Nut, then you may **glue** the bottom plate in.
 
 ## 🛠 Assembly Overview
 
