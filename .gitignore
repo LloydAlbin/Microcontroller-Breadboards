@@ -1,2 +1,16 @@
 ESP8266dev/Breadboard_ESP8266_V3_with_1.8_TFT_V2.3mf.png
 ESP8266dev/Breadboard_ESP8266_V3_with_TCA9548A_and_1.8_TFT_V2.3mf.png
+.github
+resources
+.openscad*
+WRITING_DOCS.md
+
+scripts/*.py
+scripts/*.html
+scripts/check_for_tabs.sh
+scripts/find_modular_asserts.sh
+scripts/increment_version.sh
+scripts/linecount.sh
+scripts/mkdocspdf.sh
+scripts/purge_wiki_history.sh
+scripts/run_tests.sh
