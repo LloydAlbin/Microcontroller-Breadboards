@@ -4,6 +4,7 @@ Breadboards for Wide Microcontrollers
 
 ## ToDo List
 
+- Current design does not have a back, need to add a back support when back is wanted.
 - Add Wood Screws
 - Add 2mm Nut
 - Add Back Screw
