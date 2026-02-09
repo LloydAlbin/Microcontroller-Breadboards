@@ -141,10 +141,10 @@ all_board_specs=[
 board_examples(0);
 //multi_board(0, 0, all_board_specs[0], 0, 0);
 //multi_board(0, 0, test_board_specs[0], 0, 0);
-//pin_rows2(0, 0, test_board_specs[0]);
-//pin_row2(0, 0, 7.62, false, test_board_specs[2]);
+//pin_rows(0, 0, test_board_specs[0]);
+//pin_row(0, 0, 7.62, false, test_board_specs[2]);
 /*
-pin_rows2(0, 0, [
+pin_rows(0, 0, [
     164, 
     66.2, 
     8.25, 
@@ -333,7 +333,9 @@ module single_board(x, y, board_specs)
     
             //of = ofs[len(ofs)-1];
             //echo(slots = slots, ofs = ofs, of = of);
-            if (ofs[len(ofs)-1] == 0)
+            tt = ofs[len(ofs)-1];
+            //tt = get_count_greater(board_specs[pin_layout_pos], center_item_pos, 0);
+            if (tt == 0)
             {
                 // Middle cut-out
                 translate ([x+((board_width-2)/2), y-preview_adjustment, board_height-3.4])
@@ -341,8 +343,7 @@ module single_board(x, y, board_specs)
             }
 
             // Pin Rows
-            //pin_rows_old (x, y+pin_pitch, initial_gap, row_count, secondary_gap, max_rows-row_count, board_specs);
-            pin_rows2 (x, y, board_specs);
+            pin_rows (x, y, board_specs);
 
             // Left Power Rail
             power_rail(x+2.9, y+pin_pitch*3, board_specs);
@@ -670,49 +671,6 @@ module pin_rows_text(x, y, board_specs)
 // Used By: single_board(),
 module pin_rows(x, y, board_specs)
 {
-    board_width=board_specs[board_width_pos];
-    board_height=board_specs[board_height_pos];
-    pin_pitch=board_specs[pin_pitch_pos];
-    row_specs=board_specs[pin_layout_pos];
-    
-    for (idx = [0 : len(row_specs)-1])
-    {
-        gap=row_specs[idx][gap_pos];
-        starting_row=row_specs[idx][starting_row_pos];
-        number_of_rows=row_specs[idx][number_of_rows_pos];
-        center_item=row_specs[idx][center_item_pos];
-
-        for (row_num = [0 : 1 : number_of_rows-1])
-        {
-            ny=y+((starting_row+row_num)*pin_pitch);
-            pin_row (x, ny, gap, (center_item == 1 ? true : false), board_specs);
-        }
-        
-        if (center_item==2)
-        {
-            board_center=x+(board_width/2);
-
-            translate ([board_center-((gap-(pin_pitch*2))/2), y+((starting_row+1)*pin_pitch), 0-preview_adjustment])
-            //roundedcube(gap-(pin_pitch*2), (number_of_rows-3)*pin_pitch, board_height, 0);
-            roundedcube(gap-(pin_pitch*2), (number_of_rows-3)*pin_pitch, board_height+(preview_adjustment*2), 3);
-        }
-    }
-}
-
-// Module: pin_rows2()
-// Usage:
-//   pin_rows2(x, y, board_specs);
-// Description:
-//   Creates a set of pin rows.
-// Arguments:
-//   x = x position
-//   y = y position
-//   board_specs = An individual board spec
-// Example(3D):
-//   pin_row2(2.54, 2.54, board_specs=all_board_specs[0]);
-// Used By: single_board(),
-module pin_rows2(x, y, board_specs)
-{
     //render()
     union()
     {
@@ -733,9 +691,10 @@ module pin_rows2(x, y, board_specs)
         //total_number_of_rows=row_specs[0][number_of_rows_pos];
         // 'ofs' will be a new list containing the cumulative sums
         // THIS LINE IS GIVING A WARNING BUT THE PREVIOUS TWO DON'T GIVE THE WARNING
-        ofs = [ for (o = 0, i = 0; i <= len(board_specs[pin_layout_pos]); o = o + board_specs[pin_layout_pos][i][number_of_rows_pos], i = i + 1) o ];
+        ofs = [ for (o = 0, i = 0; i <= len(board_specs[pin_layout_pos]); o = o + (board_specs[pin_layout_pos][i][number_of_rows_pos] == undef ? 0 : board_specs[pin_layout_pos][i][number_of_rows_pos]), i = i + 1) o ];
         //echo (ofs=ofs);
         total_number_of_rows=ofs[len(ofs)-1];
+        //total_number_of_rows=get_sum(board_specs[pin_layout_pos], number_of_rows_pos);
         //echo (total_number_of_rows=total_number_of_rows);
         total_rows_height = ((total_number_of_rows-1) * pin_pitch) + pin_width;
         start_row_y = (board_depth-total_rows_height)/2;
@@ -807,7 +766,7 @@ module pin_rows2(x, y, board_specs)
                         ny=((starting_row+row_num)*pin_pitch);
                         //echo (idx=idx, center_item=center_item);
                         //echo (idx=idx, center_item=(center_item == 1 ? true : false));
-                        pin_row2 (0, ny, gap, (center_item == 1 ? true : false), board_specs);
+                        pin_row (0, ny, gap, (center_item == 1 ? true : false), board_specs);
                     }
                     
                     if (center_item==2)
@@ -839,62 +798,6 @@ module pin_rows2(x, y, board_specs)
 //   pin_row(2.54, 2.54, 7.62, false, board_specs=all_board_specs[0]);
 // Used By: pin_rows(),
 module pin_row(x, y, gap, center_row, board_specs)
-{
-    board_width=board_specs[board_width_pos];
-    pin_pitch=board_specs[pin_pitch_pos];
-
-    number_of_pins=board_specs[number_of_pins_pos];
-    pin_width=board_specs[pin_width_pos];
-    board_center=x+(board_width/2);
-    
-    // Left Row
-    start_x1=board_center-(gap/2)-(((number_of_pins-1)*pin_pitch)+pin_width);
-    for (col_pin = [0 : 1 : number_of_pins-1])
-    {
-        nx = start_x1+(col_pin*pin_pitch);
-        pin_hole (nx, y, board_specs);
-    }
-    translate ([start_x1-.5, y-.5, 0-preview_adjustment])
-    cube([12.16,2,7.4+preview_adjustment]);
-
-    // Right Row
-    start_x2=board_center+(gap/2);
-    for (nx = [start_x2 : pin_pitch : start_x2+.1+((number_of_pins-1)*pin_pitch)])
-    {
-        pin_hole (nx, y, board_specs);
-    }
-  
-    translate ([start_x2-.5, y-.5, 0-preview_adjustment])
-    cube([12.16,2,7.4+preview_adjustment]);
-
-    if (center_row == true)
-    {
-        start_x3=board_center-((((number_of_pins-1)*pin_pitch)+pin_width)/2);
-        for (nx = [start_x3 : pin_pitch : start_x3+.1+((number_of_pins-1)*pin_pitch)])
-        {
-            pin_hole (nx, y, board_specs);
-        }
-      
-        translate ([start_x3-.5, y-.5, 0-preview_adjustment])
-        cube([12.16,2,7.4+preview_adjustment]);
-    }
-}
-
-// Module: pin_row2()
-// Usage:
-//   pin_row2(x, y, gap, center_row, board_specs);
-// Description:
-//   Creates an row of pin holes.
-// Arguments:
-//   x = x position
-//   y = y position
-//   gap = gap between left and right pin rows
-//   center_row = true/false if there should be a center row
-//   board_specs = An individual board spec
-// Example(3D):
-//   pin_row2(2.54, 2.54, 7.62, false, board_specs=all_board_specs[0]);
-// Used By: pin_rows2(),
-module pin_row2(x, y, gap, center_row, board_specs)
 {
     union()
     {
@@ -1149,3 +1052,17 @@ module trapezoidal_prism(xx, yy, height)
         square(size = base_size, center = true);
     }
 }
+
+function get_count_greater(row_specs, pos, v) = get_count_greater_array(row_specs, pos, v)[len(get_count_greater_array(row_specs, pos, v))-1];
+
+function get_count_greater_array(row_specs, pos, v) = [ for (o = 0, i = 0; i <= len(row_specs); o = o + (row_specs[i][pos] > v ? 1 : 0), i = i + 1) o ];
+
+function get_count_equal(row_specs, pos, v) = get_count_equal_array(row_specs, pos, v)[len(get_count_equal_array(row_specs, pos, v))-1];
+
+function get_count_equal_array(row_specs, pos, v) = [ for (o = 0, i = 0; i <= len(row_specs); o = o + (row_specs[i][pos] == v ? 1 : 0), i = i + 1) o ];
+
+function get_sum(row_specs, pos) = get_sum_array(row_specs, pos)[len(get_sum_array(row_specs, pos))-1];
+
+function get_sum_array(row_specs, pos) = [ for (o = 0, i = 0; i <= len(row_specs); o = o + (row_specs[i][pos] == undef ? 0 : row_specs[i][pos]), i = i + 1) o ];
+
+
