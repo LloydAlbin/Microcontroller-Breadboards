@@ -26,7 +26,11 @@ test_spec=[
         1,                      // Starting letter in Aphabet
         3,                      // 0 = off, 1 = back screw, 2 = 2mm Nut, 3 = 2mm Heat Insert, 4 = Wood Screw
         [
-            [7.62, 0, 17, 0,
+            [7.62, 0, 5, 0,
+            false],
+            [7.62, 5, 5, 0,
+            true],
+            [7.62, 10, 7, 0,
             false],
         ]
     ];

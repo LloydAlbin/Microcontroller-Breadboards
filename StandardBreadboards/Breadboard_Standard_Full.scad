@@ -4,7 +4,7 @@ $fn = $preview ? 32 : 64;
 
 Standard_Breadboard_Full_spec=[
     164, 
-    55, 
+    53.3, 
     8.25, 
     2.54, 
     10, 
