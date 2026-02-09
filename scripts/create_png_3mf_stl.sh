@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+error_flag=0
+
 process_file()
 {
     FILE_PATH=$1
@@ -11,7 +13,12 @@ process_file()
     rm -rf "${directory}/${filename}.3mf"
     rm -rf "${directory}/${filename}.stl"
     openscad --imgsize 1024,1024 -o "${directory}/${filename}.3mf.png" "${directory}/${filename}.scad"
-    magick "${directory}/${filename}.3mf.png" -fuzz 15% -transparent white "${directory}/${filename}.3mf.png"
+    if [ $? -ne 0 ]; then
+        rm -rf "${directory}/${filename}.3mf.png"
+        echo "Filed to process scad file"
+    else
+        magick "${directory}/${filename}.3mf.png" -fuzz 15% -transparent white "${directory}/${filename}.3mf.png"
+    fi
     openscad --imgsize 1024,1024 --render -o "${directory}/${filename}.stl.png" -o "${directory}/${filename}.3mf" -o "${directory}/${filename}.stl" "${directory}/${filename}.scad"
     magick "${directory}/${filename}.stl.png" -fuzz 15% -transparent white "${directory}/${filename}.stl.png"
 }
@@ -33,8 +40,11 @@ if [ $# -ne 0 ]; then
                     fi
                 fi
             done
-        else
+        elif [ -f "$var" ]; then
             process_file "$var"
+        else
+            echo "Not a file or directory: $var"
+            error_flag=1
         fi
     done
 else
@@ -48,4 +58,4 @@ else
     done
 fi
 
-exit 0;
+exit $error_flag
