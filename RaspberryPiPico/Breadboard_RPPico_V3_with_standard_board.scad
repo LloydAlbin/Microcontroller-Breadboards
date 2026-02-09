@@ -19,6 +19,7 @@ RaspberryPiPico_spec=[
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 
     1, 
     3, 
+    true,
     [
         [
             17.78-1, 
@@ -51,6 +52,7 @@ standard_board=[
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 
     1, 
     3, 
+    true,
     [
         [
             7.62, 

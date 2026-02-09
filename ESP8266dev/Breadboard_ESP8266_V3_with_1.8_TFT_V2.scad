@@ -28,6 +28,7 @@ ESP32_spec=[
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 
     1, 
     3, 
+    false,
     [
         [
             22.86-1, 
@@ -66,7 +67,8 @@ standard_board=[
     "Nimbus Sans L:Bold", 
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 
     1, 
-    3, 
+    3,
+    false, 
     [
         [
             7.62, 
@@ -98,7 +100,8 @@ display_board=[
     "Nimbus Sans L:Bold", 
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 
     1, 
-    3, 
+    3,
+    false, 
     [
         [
             53, 

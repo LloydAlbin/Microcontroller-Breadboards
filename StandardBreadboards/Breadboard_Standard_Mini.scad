@@ -16,6 +16,7 @@ Standard_Breadboard_Mini_spec=[
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 
     1, 
     3, 
+    true,
     [
         [
             7.62, 

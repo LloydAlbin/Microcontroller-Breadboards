@@ -49,7 +49,8 @@ text_font_pos=9;
 alphabet_pos=10;
 starting_letter_pos=11;
 mount_type_pos=12;
-pin_layout_pos=13;
+center_rail_pos=13;
+pin_layout_pos=14;
 // Positions in the pin layout sub-array
 gap_pos=0;
 starting_row_pos=1;
@@ -75,6 +76,7 @@ test_board_specs=[
         global_alphabet,        // Alphabet to use for column numbering/lettering
         global_starting_letter, // Starting letter in Aphabet
         3, // 0 = off, 1 = back screw, 2 = 2mm Nut, 3 = 2mm Heat Insert, 4 = Wood Screw
+        false,                  // False = No Center Rail, True = Center Rail
         [
             [
                 25.4-1, // gap
@@ -103,37 +105,40 @@ test_board_specs=[
         global_alphabet, // Alphabet to use for column numbering/lettering
         27, // Starting letter in Aphabet
         3, // 0 = off, 1 = back screw, 2 = 2mm Nut, 3 = 2mm Heat Insert, 4 = Wood Screw
+        true,                  // False = No Center Rail, True = Center Rail
         [
             [25.4-1, 0, 5, 0, false],
             [7.62, 5, 4, 0, false],
         ]
     ],
 // Test Board #3
-[45, 35, 8.25, 2.54, 0, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[7.62, 0, 17, 0, false]]],
+[45, 35, 8.25, 2.54, 0, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, 
+        true,                  // False = No Center Rail, True = Center Rail
+        [[7.62, 0, 17, 0, false]]],
 ];
 
 // This is where you define the board styles
 all_board_specs=[
 // Standard Board (Full Size)
-[164, 55, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[7.62, 0, 63, 0, false]]],
+[164, 55, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, true, [[7.62, 0, 63, 0, false]]],
 // Standard Board (1/2 Size)
-[81.5, 55, 8.25, 2.54, 5, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[7.62, 0, 30, 0, false]]],
+[81.5, 55, 8.25, 2.54, 5, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, true, [[7.62, 0, 30, 0, false]]],
 // Standard Board (Mini Size)
-[45, 35, 8.25, 2.54, 0, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[7.62, 0, 17, 0, false]]],
+[45, 35, 8.25, 2.54, 0, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, true, [[7.62, 0, 17, 0, false]]],
 // Raspberry PI Pico / Waveshare ESP32-P4-WIFI6
-[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[17.78-1, 0, 24, 2, false], [7.62, 24, 63-24, 0, false]]],
+[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, true, [[17.78-1, 0, 24, 2, false], [7.62, 24, 63-24, 0, false]]],
 // ESP32 V1
-[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[25.4-1, 0, 63, 2, false]]],
+[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, true, [[25.4-1, 0, 63, 2, false]]],
 // ESP32 V2
-[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[25.4-1, 0, 24, 2, false], [25.4-1, 24, 63-24, 1, false]]],
+[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, false, [[25.4-1, 0, 24, 2, false], [25.4-1, 24, 63-24, 1, false]]],
 // ESP32 V3
-[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[25.4-1, 0, 24, 2, false], [7.62, 24, 63-24, 2, false]]],
+[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, true, [[25.4-1, 0, 24, 2, false], [7.62, 24, 63-24, 2, false]]],
 // ESP8266 (Mini) V1
-[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[22.86-1, 0, 63, 2, false]]],
+[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, true, [[22.86-1, 0, 63, 2, false]]],
 // ESP8266 (Mini) V2
-[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[22.86-1, 0, 24, 2, false], [22.86-1, 24, 63-24, 1, false]]],
+[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, false, [[22.86-1, 0, 24, 2, false], [22.86-1, 24, 63-24, 1, false]]],
 // ESP8266 (Mini) V3
-[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, [[22.86-1, 0, 24, 2, false], [7.62, 24, 63-24, 0, false]]],
+[(63+1)*2.54, 54.2, 8.25, 2.54, 10, 1, 5, global_text_size, global_text_thickness, global_text_font, global_alphabet, global_starting_letter, 3, true, [[22.86-1, 0, 24, 2, false], [7.62, 24, 63-24, 0, false]]],
 ];
 
 //multi_board(x, y, all_board_specs[board_number], dups_x, dups_y);
@@ -328,14 +333,7 @@ module single_board(x, y, board_specs)
             translate ([x,y,0])
             cube([board_width,board_depth,board_height]);
 
-             // 'ofs' will be a new list containing the cumulative sums
-            ofs = [ for (o = 0, i = 0; i <= len(board_specs[pin_layout_pos]); o = o + (board_specs[pin_layout_pos][i][center_item_pos] == 1 ? 1 : 0) + (board_specs[pin_layout_pos][i][center_item_pos] == 2 ? 1 : 0), i = i + 1) o ];
-    
-            //of = ofs[len(ofs)-1];
-            //echo(slots = slots, ofs = ofs, of = of);
-            tt = ofs[len(ofs)-1];
-            //tt = get_count_greater(board_specs[pin_layout_pos], center_item_pos, 0);
-            if (tt == 0)
+            if (board_specs[center_rail_pos])
             {
                 // Middle cut-out
                 translate ([x+((board_width-2)/2), y-preview_adjustment, board_height-3.4])

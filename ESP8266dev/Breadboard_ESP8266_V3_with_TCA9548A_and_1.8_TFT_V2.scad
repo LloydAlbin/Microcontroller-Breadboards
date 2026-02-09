@@ -25,6 +25,7 @@ ESP32_spec=[
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 
     1, 
     3, 
+    false,
     [
         [
             22.86-1, 
@@ -63,6 +64,7 @@ TCA9548A_spec=[
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 
     1, 
     3, 
+    false,
     [
         [
             22.86-1-2.54-2.54, 
@@ -102,6 +104,7 @@ display_board=[
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 
     1, 
     3, 
+    false,
     [
         [
             53, 

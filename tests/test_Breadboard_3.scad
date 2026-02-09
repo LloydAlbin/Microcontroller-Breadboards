@@ -25,6 +25,7 @@ test_spec=[
         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", // Alphabet to use for column numbering/lettering 
         1,                      // Starting letter in Aphabet
         3,                      // 0 = off, 1 = back screw, 2 = 2mm Nut, 3 = 2mm Heat Insert, 4 = Wood Screw
+        true,
         [
             [7.62, 0, 5, 0,
             false],

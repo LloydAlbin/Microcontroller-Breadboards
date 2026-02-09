@@ -24,7 +24,8 @@ ESP32_spec=[
     "Nimbus Sans L:Bold", 
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 
     1, 
-    3, 
+    3,
+    true, 
     [
         [
             22.86-1, 

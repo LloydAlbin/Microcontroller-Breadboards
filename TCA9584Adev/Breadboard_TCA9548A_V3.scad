@@ -15,7 +15,8 @@ TCA9548A_spec=[
     "Nimbus Sans L:Bold", 
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 
     1, 
-    3, 
+    3,
+    false, 
     [
         [
             22.86-1-2.54-2.54, 

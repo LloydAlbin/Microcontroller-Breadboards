@@ -81,7 +81,7 @@ The concept was inspired by Fixing Breadboards for Wide Microcontrollers – Pic
 [Fixing Breadboards for Wide Microcontrollers – Pico & ESP32 Edition](https://github.com/lhm0/wide-mcu-breadboard)
 This version expands the idea to a **full-length 63-row breadboard** with **complete power rails**.
 
-The concept was inspired by the MAKE Advent Calendar project on Tinkercad:  
+Who's concept was inspired by the MAKE Advent Calendar project on Tinkercad:  
 [MAKE ESP Breadboard](https://www.tinkercad.com/things/bsXsvygyo6F-make-esp-breadboard)
 This version expands the idea to a **full-length 63-row breadboard** with **complete power rails**.
 

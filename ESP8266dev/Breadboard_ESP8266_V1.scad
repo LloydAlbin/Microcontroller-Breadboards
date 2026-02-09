@@ -25,6 +25,7 @@ ESP32_spec=[
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 
     1, 
     3, 
+    true,
     [
         [
             22.86-1, 

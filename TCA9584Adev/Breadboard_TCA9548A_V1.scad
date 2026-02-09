@@ -16,6 +16,7 @@ TCA9548A_spec=[
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", 
     1, 
     3, 
+    true,
     [
         [
             22.86-1-2.54-2.54, 
