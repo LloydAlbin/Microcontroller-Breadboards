@@ -26,8 +26,8 @@ With this custom breadboard, the microcontroller sits in the middle, leaving **f
 - Contact springs **recycled** from an existing breadboard
 - Unlimited Variants
 - Mouting Options
-  - None
-  - Heat Insert
+  - None / Double stick foam back
+  - M2 Heat Insert
   - M2 Nut
   - Wood Screw
 - Fully 3D-printable design (OpenSCAD source included)
@@ -68,7 +68,7 @@ If you can't use the Heat Insert of Nut, then you may **glue** the bottom plate 
 3. Insert contacts into the 3D-printed body
 4. Insert power rails on both sides
 5. Mount or glue the bottom plate
-6. Plug in Pico/ESP32-P4-WIFI6, ESP32, ESP8366, or TCS9648A and start prototyping!
+6. Plug in Pico/ESP32-P4-WIFI6, ESP32, ESP8266, or TCS9648A and start prototyping!
 
 ## 📷 Photos & Documentation
 
