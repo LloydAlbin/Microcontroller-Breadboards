@@ -28,7 +28,7 @@ TODO LIST:
 //$fn = $preview ? 32 : 64;
 
 preview_adjustment = 0.001; // This fixed the preview, but does not make a difference in the final item.
-global_text_size = 1.5;
+global_text_size = 1.0;
 global_text_thickness = 1;
 global_text_font = "Nimbus Sans L:Bold";
 global_alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -148,6 +148,7 @@ board_examples(0);
 //multi_board(0, 0, test_board_specs[0], 0, 0);
 //pin_rows(0, 0, test_board_specs[0]);
 //pin_row(0, 0, 7.62, false, test_board_specs[2]);
+//power_rail(test_board_specs[0][pin_pitch_pos]+.1, test_board_specs[0][pin_pitch_pos]*3, test_board_specs[0]);
 /*
 pin_rows(0, 0, [
     164, 
@@ -369,7 +370,7 @@ module single_board(x, y, board_specs)
                             // Heat Insert
                             
                             // Bottom Left Heat Insert
-                            translate([x+4,y+4,6])
+                            translate([x+4,y+3,6])
                             rotate([180,0,0])
                             eee_stud(
                                 x=0,
@@ -383,7 +384,7 @@ module single_board(x, y, board_specs)
                             );
                             
                             // Bottom Right Heat Insert
-                            translate([x+board_width-4,y+4,6])
+                            translate([x+board_width-4,y+3,6])
                             rotate([180,0,0])
                             eee_stud(
                                 x=0,
@@ -397,7 +398,7 @@ module single_board(x, y, board_specs)
                             );
                             
                             // Top Left Heat Insert
-                            translate([x+4,y+board_depth-4,6])
+                            translate([x+4,y+board_depth-3,6])
                             rotate([180,0,0])
                             eee_stud(
                                 x=0,
@@ -411,7 +412,7 @@ module single_board(x, y, board_specs)
                             );
                             
                             // Top Right Heat Insert
-                            translate([x+board_width-4,y+board_depth-4,6])
+                            translate([x+board_width-4,y+board_depth-3,6])
                             rotate([180,0,0])
                             eee_stud(
                                 x=0,
@@ -487,7 +488,7 @@ module single_board(x, y, board_specs)
             power_rail_text(x+board_width-pin_pitch-pin_pitch-pin_width-.2, y+pin_pitch*3, board_specs);
         }
         
-        pin_rows_text(x, y+pin_pitch, board_specs);
+        pin_rows_text(x, y+pin_pitch-.4, board_specs);
 
         debug=false;
         if (debug == true)
@@ -520,23 +521,41 @@ module power_rail(x, y, board_specs)
     pin_pitch=board_specs[pin_pitch_pos];
     power_rail_sections=board_specs[power_rail_sections_pos];
 
-    for (section = [0 : 1 : power_rail_sections-1])
+    union()
     {
-        for (ny = [y+(section*pin_pitch*6) : pin_pitch : y+(section*pin_pitch*6)+.1+((5-1)*pin_pitch)])
+        for (section = [0 : 1 : power_rail_sections-1])
         {
-            pin_hole (x, ny, board_specs);
+            for (ny = [y+(section*pin_pitch*6) : pin_pitch : y+(section*pin_pitch*6)+.1+((5-1)*pin_pitch)])
+            {
+                pin_hole (x, ny, board_specs);
+            }
+            translate ([x-.5, (y+(section*pin_pitch*6))-.5, 0-preview_adjustment])
+            cube([2,12.16,7.4+preview_adjustment]);
+
+            translate ([x-.5, (y+(section*pin_pitch*6))-1.5, 0-preview_adjustment])
+            cube([2, 14.16, 1.7+preview_adjustment]);
         }
-        translate ([x-.5, (y+(section*pin_pitch*6))-.5, 0-preview_adjustment])
-        cube([2,12.16,7.4+preview_adjustment]);
-    }
-    for (section = [0 : 1 : power_rail_sections-1])
-    {
-        for (ny = [y+(section*pin_pitch*6) : pin_pitch : y+(section*pin_pitch*6)+.1+((5-1)*pin_pitch)])
+
+        translate ([x-.5, y-1.5, 0-preview_adjustment])
+        cube([2, 14.16+((power_rail_sections-1)*pin_pitch*6), 1.1+preview_adjustment]);
+
+
+
+        for (section = [0 : 1 : power_rail_sections-1])
         {
-            pin_hole (x+pin_pitch, ny, board_specs);
+            for (ny = [y+(section*pin_pitch*6) : pin_pitch : y+(section*pin_pitch*6)+.1+((5-1)*pin_pitch)])
+            {
+                pin_hole (x+pin_pitch, ny, board_specs);
+            }
+            translate ([x+pin_pitch-.5, (y+(section*pin_pitch*6))-.5, 0-preview_adjustment])
+            cube([2,12.16,7.4+preview_adjustment]);
+
+            translate ([x+pin_pitch-.5, (y+(section*pin_pitch*6))-1.5, 0-preview_adjustment])
+            cube([2, 14.16, 1.7+preview_adjustment]);
         }
-        translate ([x+pin_pitch-.5, (y+(section*pin_pitch*6))-.5, 0-preview_adjustment])
-        cube([2,12.16,7.4+preview_adjustment]);
+
+        translate ([x+pin_pitch-.5, y-1.5, 0-preview_adjustment])
+        cube([2, 14.16+((power_rail_sections-1)*pin_pitch*6), 1.1+preview_adjustment]);
     }
 }
 
@@ -625,6 +644,9 @@ module pin_rows_text(x, y, board_specs)
     text_size = board_specs[text_size_pos];
     text_thickness = board_specs[text_thickness_pos];
     text_font = board_specs[text_font_pos];
+
+    // TODO:
+    // SETUP CENTEREING THE SAME WAY AS FOR pin_rows()
 
     board_center=x+(board_width/2);
     start_x1=board_center-(gap/2)-(((number_of_pins-1)*pin_pitch)+pin_width);
@@ -827,7 +849,10 @@ module pin_row(x, y, gap, center_row, board_specs)
             pin_hole (nx, y, board_specs);
         }
         translate ([start_x1-.5, y-.5, 0-preview_adjustment])
-        cube([12.16,2,7.4+preview_adjustment]);
+        cube([12.16, 2, 7.4+preview_adjustment]);
+
+        translate ([start_x1-1.5, y-.5, 0-preview_adjustment])
+        cube([14.16, 2, 1.95+preview_adjustment]);
 
         // Right Row
         start_x2=start_x1+((number_of_pins-1)*pin_pitch)+gap;
@@ -837,7 +862,10 @@ module pin_row(x, y, gap, center_row, board_specs)
         }
       
         translate ([start_x2-.5, y-.5, 0-preview_adjustment])
-        cube([12.16,2,7.4+preview_adjustment]);
+        cube([12.16, 2, 7.4+preview_adjustment]);
+
+        translate ([start_x2-1.5, y-.5, 0-preview_adjustment])
+        cube([14.16, 2, 1.95+preview_adjustment]);
 
         if (center_row == true)
         {
@@ -859,7 +887,10 @@ module pin_row(x, y, gap, center_row, board_specs)
             }
           
             translate ([start_x3-.5, y-.5, 0-preview_adjustment])
-            cube([12.16,2,7.4+preview_adjustment]);
+            cube([12.16, 2, 7.4+preview_adjustment]);
+
+            translate ([start_x3-1.5, y-.5, 0-preview_adjustment])
+            cube([14.16, 2, 1.95+preview_adjustment]);
         }
     }
 }
@@ -881,15 +912,18 @@ module pin_hole(x, y, board_specs)
     board_height=board_specs[board_height_pos];
     pin_width=board_specs[pin_width_pos];
 
-    translate ([x, y, 0-preview_adjustment])
-    cube([pin_width,pin_width,board_height+(preview_adjustment*2)]);
+    union()
+    {
+        translate ([x, y, 0-preview_adjustment])
+        cube([pin_width,pin_width,board_height+(preview_adjustment*2)]);
 
-    pin_slope_border = 0.1;
-    pin_slope_border_per_side = pin_slope_border/2;
-    
-    translate ([x-(pin_slope_border_per_side/2), y-pin_slope_border_per_side+pin_width, board_height+preview_adjustment])
-    rotate([180,0,0])
-    trapezoidal_prism(pin_width, pin_width, .15);
+        pin_slope_border = 0.1;
+        pin_slope_border_per_side = pin_slope_border/2;
+        
+        translate ([x-(pin_slope_border_per_side/2), y-pin_slope_border_per_side+pin_width, board_height+preview_adjustment])
+        rotate([180,0,0])
+        trapezoidal_prism(pin_width, pin_width, .15);
+    }
 }
 
 // Module: roundedcube()
