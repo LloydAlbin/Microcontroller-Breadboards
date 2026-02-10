@@ -319,6 +319,7 @@ module single_board(x, y, board_specs)
     board_depth=board_specs[board_depth_pos];
     board_width=board_specs[board_width_pos];
     board_height=board_specs[board_height_pos];
+    pin_width=board_specs[pin_width_pos];
     pin_pitch=board_specs[pin_pitch_pos];
     power_rail_sections=board_specs[power_rail_sections_pos];
     mount_type=board_specs[mount_type_pos];
@@ -344,10 +345,10 @@ module single_board(x, y, board_specs)
             pin_rows (x, y, board_specs);
 
             // Left Power Rail
-            power_rail(x+2.9, y+pin_pitch*3, board_specs);
+            power_rail(x+pin_pitch+.1, y+pin_pitch*3, board_specs);
 
             // Right Power Rail
-            power_rail(x+board_width-2.9-pin_pitch, y+pin_pitch*3, board_specs);
+            power_rail(x+board_width-pin_pitch-pin_pitch-pin_width-.1, y+pin_pitch*3, board_specs);
             
             render()
             {
@@ -480,13 +481,25 @@ module single_board(x, y, board_specs)
         if (power_rail_sections > 0)
         {
             // Left Power Rail
-            power_rail_text(x+2.9, y+pin_pitch*3, board_specs);
+            power_rail_text(x+pin_pitch-.1, y+pin_pitch*3, board_specs);
 
             // Right Power Rail
-            power_rail_text(x+board_width-2.9-pin_pitch, y+pin_pitch*3, board_specs);
+            power_rail_text(x+board_width-pin_pitch-pin_pitch-pin_width-.2, y+pin_pitch*3, board_specs);
         }
         
         pin_rows_text(x, y+pin_pitch, board_specs);
+
+        debug=false;
+        if (debug == true)
+        {
+            color("green")
+            translate([x,y+pin_pitch*3,board_height])
+            cube([pin_pitch,pin_pitch,.5]);
+
+            color("green")
+            translate([x+board_width-pin_pitch,y+pin_pitch*3,board_height])
+            cube([pin_pitch,pin_pitch,.5]);
+        }
     }
 }
 
