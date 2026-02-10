@@ -1,6 +1,6 @@
 use <../MicrocontrollerBreadboards.scad>;
 
-$fn = $preview ? 32 : 64;
+//$fn = $preview ? 8 : 64;
 
 /*
 // ESP8266 (Mini) V1
